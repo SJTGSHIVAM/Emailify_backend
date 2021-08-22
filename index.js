@@ -3,11 +3,18 @@ import mongoose from "mongoose";
 import _ from "./services/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import { monoURI } from "./config/keys.js";
-mongoose.connect(monoURI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(monoURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("mongoose connected");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 const app = express();
 authRoutes(app);
